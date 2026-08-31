@@ -4,31 +4,27 @@
 
 CephAI is a proprietary AI-powered system developed for automated cephalometric analysis of lateral cephalograms. It transforms imaging into actionable clinical data in seconds, ensuring sub-millimeter precision and peer-validated diagnostic accuracy.
 
+## 🖼️ Project Preview
+
+<p align="center">
+  <img src="./Image1.png" alt="CephAI system overview" width="900" />
+</p>
+
+<p align="center">
+  <img src="./image2.png" alt="CephAI analysis workflow" width="900" />
+</p>
+
 ---
 
 ## 🔒 Confidentiality & Usage
 This repository contains proprietary intellectual property. Unauthorized copying, distribution, modification, reverse engineering, or use of this code, models, or system design is strictly prohibited. This project is intended for academic submission, patent filing, and controlled research usage. **It is NOT open-source software.**
-
----
-
-## ✨ Core Features
-This project includes:
-- **Automated landmark detection**
-- **Skeletal classification**
-- **Cephalometric angle computation**
-- **Airway analysis**
-- **AI-assisted manual landmark correction**
-- **Clinical PDF report generation**
-- **Master Excel logging system**
-
----
 
 ## 🔍 Detailed Capabilities
 
 ### 🧠 Anatomical Analysis
 - **Automated Landmark Detection**: Identify 11 (Clinical) or 19 (ML Neural) anatomical benchmarks with AI precision.
 - **Skeletal Classification**: Automated categorization into Class I, II, or III skeletal patterns using peer-validated models.
-- **Angle Computation**: Instant calculation of critical angles including SNA, SNB, ANB, and more.
+- **Angle Computation**: Instant calculation of critical angles including SNA, SNB, ANB, FMA, IMPA, Facial Axis, Y-Axis, and Mandibular Plane Angle.
 - **Airway Analysis**: 2D pharyngeal space measurement for respiratory and surgical assessment.
 
 ### 🛠️ Clinical Workflow
@@ -51,6 +47,7 @@ This project includes:
 - **React Frontend**: Premium responsive dashboard with modern aesthetics and dark-mode support.
 - **Deep Learning Layer**: TensorFlow/Keras for landmark regression; Scikit-learn for pattern classification.
 - **Secure Data Management**: SQLite with SQLAlchemy ORM for lightweight and portable database operations.
+- **API Documentation**: Automated Swagger/OpenAPI documentation available at `/docs`.
 
 ---
 
@@ -77,13 +74,33 @@ npm start
 ```
 
 ### 3. Environment Configuration
-Create a `.env` file in `backend/`:
+Copy the provided `.env.example` to `.env` and update the values:
+```bash
+cp .env.example .env
+```
+Key variables to configure in `backend/.env`:
 ```env
 DATABASE_URL=sqlite:///./ceph.db
 SECRET_KEY=your_secure_random_key
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=60
 ```
+
+---
+
+## 🎯 Target Users
+- **Orthodontists & Dentists**: For rapid clinical diagnosis and patient communication.
+- **Hospitals & Clinics**: To standardize cephalometric reporting workflows.
+- **Research Institutions**: For large-scale anatomical data analysis.
+- **AI Researchers**: As a baseline for automated medical landmarking.
+
+---
+
+## 🔮 Future Enhancements
+- **PINN Integration**: Physics-Informed Neural Networks for anatomical correction.
+- **Multi-Model Ensemble**: Combining heatmaps and regression for 99.9% accuracy.
+- **AutoCeph Module**: Comparative analysis between previous and current patient scans.
+- **Cloud Analytics**: Aggregated population-level diagnostic dashboards.
 
 ---
 

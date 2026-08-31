@@ -79,8 +79,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     }
 
     access_token = utils.create_access_token(
-        data=token_data,
-        expires_delta=timedelta(hours=24)
+        data=token_data
     )
 
     return {
@@ -106,8 +105,9 @@ def forgot_password(req: schemas.PasswordResetRequest, db: Session = Depends(get
     user.reset_token_expiry = datetime.utcnow() + timedelta(hours=1)
     db.commit()
 
-    # In production, this would be your actual frontend URL
-    reset_link = f"http://localhost:3000/reset-password?token={token}"
+    # Use environment variable for frontend URL to support production deployment
+    frontend_base = os.getenv("FRONTEND_URL", "http://localhost:3000")
+    reset_link = f"{frontend_base}/reset-password?token={token}"
     send_password_reset_email(user.username, reset_link)
 
     return {"message": "If this email is registered, a reset link has been sent."}

@@ -43,9 +43,11 @@ if STORAGE_MODE == "local":
 # ==================================================
 # CORS
 # ==================================================
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -138,7 +140,10 @@ async def clinical_finalize(
     except:
         raise HTTPException(400, "Invalid landmarks")
 
-    result = ml_inference.process_clinical_finalize(
+    from starlette.concurrency import run_in_threadpool
+    
+    result = await run_in_threadpool(
+        ml_inference.process_clinical_finalize,
         image_bytes=image_bytes,
         ceph_id=patient_id,
         edited_landmarks=parsed_landmarks

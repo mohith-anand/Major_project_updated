@@ -19,9 +19,12 @@ pwd_context = CryptContext(
     deprecated="auto"
 )
 
-SECRET = os.getenv("JWT_SECRET") or os.getenv("SECRET_KEY") or "supersecret"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 1 day
+SECRET = os.getenv("SECRET_KEY")
+if not SECRET:
+    raise RuntimeError("SECRET_KEY environment variable not set. Application cannot start.")
+
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60"))
 
 security = HTTPBearer()
 
